@@ -14,31 +14,53 @@ violators will be reported and appropriate action will be taken.
 '''
 
 import sys
+from assignment1 import after
+after('2023-01-25')
 
-def leap_year(year: int) -> bool:
-    "Returns True if the year is a leap year"
-    # Leap year is divisible by 4, not divisible by 100 unless also divisible by 400
-    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+# assignment1.py
 
+def leap_year(year):
+    """Determines if a given year is a leap year."""
+    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+        return True
+    return False
 
+def mon_max(month, year):
+    """Returns the maximum number of days in a given month."""
+    if month in [1, 3, 5, 7, 8, 10, 12]:
+        return 31
+    elif month in [4, 6, 9, 11]:
+        return 30
+    elif month == 2:
+        return 29 if leap_year(year) else 28
+    return None  # Invalid month
 
-def mon_max(month:int, year:int) -> int:
-    "returns the maximum day for a given month. Includes leap year check"
-    ...
+def after(day, month, year, n):
+    """Calculates the date after n days from the given date."""
+    while n > 0:
+        max_days = mon_max(month, year)
+        if day + n <= max_days:
+            day += n
+            n = 0
+        else:
+            n -= (max_days - day + 1)
+            day = 1
+            month += 1
+            if month > 12:
+                month = 1
+                year += 1
+    return day, month, year
 
-def after(date: str) -> str:
-    '''
-    after() -> date for next day in YYYY-MM-DD string format
+def day_of_week(day, month, year):
+    """Determines the day of the week for a given date."""
+    if month < 3:
+        month += 12
+        year -= 1
+    k = year % 100
+    j = year // 100
+    f = day + ((13 * (month + 1)) // 5) + k + (k // 4) + (j // 4) - (2 * j)
+    return f % 7  # 0=Saturday, 1=Sunday, ..., 6=Friday
 
-    Return the date for the next day of the given date in YYYY-MM-DD format.
-    This function takes care of the number of days in February for leap year.
-    This fucntion has been tested to work for year after 1582
-    '''
-    str_year, str_month, str_day = date.split('-')
-    year = int(str_year)
-    month = int(str_month)
-    day = int(str_day)
-    tmp_day = day + 1  # next day
 
     if tmp_day > mon_max(month, year):
         to_day = tmp_day % mon_max(month, year)  # if tmp_day > this month's max, reset to 1 
