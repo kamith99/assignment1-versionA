@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 '''
-OPS435 Assignment 1 - Summer 2023
+OPS435 Assignment 1 - Summer 2024
 Program: assignment1.py 
-Author: "Student Name"
-The python code in this file (a1_[Student_id].py) is original work written by
-"Student Name". No code in this file is copied from any other source
+Author: Dalsha Kamith Balasooriya
+The python code in this file (a1_bkamith.py) is original work written by
+Dalsha Kamith. No code in this file is copied from any other source
 except those provided by the course instructor, including any person,
 textbook, or on-line resource. I have not shared this python script
 with anyone or anything except for submission for grading. I understand
@@ -105,8 +105,14 @@ def day_count(start_date: str, stop_date: str) -> int:
             weekend_days += 1
         current_date = after(current_date)
     
+    # Check the stop date itself if it's a weekend day
+    year, month, day = map(int, stop_date.split('-'))
+    if day_of_week(year, month, day) in ['sat', 'sun']:
+             weekend_days += 1
+    
     return weekend_days
-
+    
+  
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
