@@ -76,8 +76,11 @@ def after(date: str) -> str:
 
 
 def usage():
-    """Print a usage message to the user."""
+    """Print a helpful usage message and exit."""
     print("Usage: assignment1.py YYYY-MM-DD YYYY-MM-DD")
+    print("Both dates must be valid and in the format YYYY-MM-DD.")
+    print("The first date should be earlier than or equal to the second.")
+    print("The program calculates the number of weekend days in the range.")
     sys.exit(1)
 
 
