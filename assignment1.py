@@ -84,14 +84,23 @@ def usage():
 def valid_date(date: str) -> bool:
     """Check validity of date and return True if valid."""
     try:
+        # Try to split the date and convert the parts to integers
         year, month, day = map(int, date.split('-'))
+
+        # Check if the month is within the valid range (1-12)
         if month < 1 or month > 12:
             return False
+    
+        # Check if the day is within the valid range for the given month and year
         if day < 1 or day > mon_max(month, year):
             return False
+        
+        # If both checks pass, return True (valid date)
         return True
     except ValueError:
+        # In case of incorrect input format or conversion errors
         return False
+
 
 
 def day_count(start_date: str, stop_date: str) -> int:
