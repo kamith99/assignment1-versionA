@@ -15,14 +15,11 @@ violators will be reported and appropriate action will be taken.
 
 import sys
 
-def day_of_week(year: int, month: int, date: int) -> str:
-    "Based on the algorithm by Tomohiko Sakamoto"
-    days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] 
-    offset = {1:0, 2:3, 3:2, 4:5, 5:0, 6:3, 7:5, 8:1, 9:4, 10:6, 11:2, 12:4}
-    if month < 3:
-        year -= 1
-    num = (year + year//4 - year//100 + year//400 + offset[month] + date) % 7
-    return days[num]
+def leap_year(year: int) -> bool:
+    "Returns True if the year is a leap year"
+    # Leap year is divisible by 4, not divisible by 100 unless also divisible by 400
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+
 
 
 def mon_max(month:int, year:int) -> int:
