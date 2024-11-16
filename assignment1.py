@@ -82,23 +82,30 @@ def usage():
 
 
 def valid_date(date: str) -> bool:
-    """Check validity of date and return True if valid."""
-    try:
-        # Try to split the date and convert the parts to integers
-        year, month, day = map(int, date.split('-'))
+    """Verify if the given date is valid in the format YYYY-MM-DD."""
+    
+    # Ensure the input length matches the expected format and contains hyphens at correct positions
+    if len(date) != 10 or date[4:5] != '-' or date[7:8] != '-':
+        return False
 
-        # Check if the month is within the valid range (1-12)
+    try:
+        # Break down the date string and convert parts to integers
+        parts = date.split('-')
+        year = int(parts[0])
+        month = int(parts[1])
+        day = int(parts[2])
+
+        # Validate the month range
         if month < 1 or month > 12:
             return False
-    
-        # Check if the day is within the valid range for the given month and year
+
+        # Validate the day based on the month's maximum days
         if day < 1 or day > mon_max(month, year):
             return False
-        
-        # If both checks pass, return True (valid date)
-        return True
-    except ValueError:
-        # In case of incorrect input format or conversion errors
+
+        return True  # Date passed all checks
+    except (ValueError, IndexError):
+        # If splitting or conversion fails, the date is invalid
         return False
 
 
@@ -122,7 +129,6 @@ def day_count(start_date: str, stop_date: str) -> int:
     return weekend_days
     
   
-
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         usage()
