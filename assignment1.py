@@ -5,7 +5,7 @@ OPS435 Assignment 1 - Summer 2024
 Program: assignment1.py 
 Author: Dalsha Kamith Balasooriya
 The python code in this file (a1_bkamith.py) is original work written by
-Dalsha Kamith. No code in this file is copied from any other source
+Dalsha Kamith Balasooriya. No code in this file is copied from any other source
 except those provided by the course instructor, including any person,
 textbook, or on-line resource. I have not shared this python script
 with anyone or anything except for submission for grading. I understand
